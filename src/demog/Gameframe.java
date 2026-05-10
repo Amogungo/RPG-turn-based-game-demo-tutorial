@@ -4,6 +4,8 @@
  */
 package demog;
 
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author hp
@@ -90,6 +92,11 @@ public class Gameframe extends javax.swing.JFrame {
         button4.setBackground(new java.awt.Color(0, 204, 153));
         button4.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         button4.setLabel("Flee");
+        button4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                button4MouseClicked(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
         jPanel2.setForeground(new java.awt.Color(51, 51, 51));
@@ -213,6 +220,16 @@ public class Gameframe extends javax.swing.JFrame {
     private void AttackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttackActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AttackActionPerformed
+
+    private void button4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button4MouseClicked
+        // TODO add your handling code here:
+        Map Mframe = new Map();
+    
+        Mframe.pack();
+        Mframe.setLocationRelativeTo(this); // centers
+        Mframe.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_button4MouseClicked
 
     /**
      * @param args the command line arguments

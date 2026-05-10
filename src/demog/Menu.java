@@ -132,7 +132,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-         javax.swing.JFrame frame = new javax.swing.JFrame("Classes");
+        javax.swing.JFrame frame = new javax.swing.JFrame("Classes");
         Classes Classframe = new Classes();
     
         frame.add(Classframe);
