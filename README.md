@@ -1,1 +1,2 @@
-Inspiration: bookworm/Paper mario
+Inspiration: bookworm
+design:Paper mario
