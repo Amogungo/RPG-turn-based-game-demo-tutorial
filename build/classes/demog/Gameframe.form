@@ -109,15 +109,20 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="Attack" min="-2" pref="210" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="button1" min="-2" pref="195" max="-2" attributes="0"/>
+                          <Component id="Skills" min="-2" pref="164" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="button3" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="Items" min="-2" pref="137" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="button4" min="-2" pref="209" max="-2" attributes="0"/>
+                          <Component id="RUN" min="-2" pref="153" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="Defend" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -128,10 +133,11 @@
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="button3" max="32767" attributes="0"/>
-                      <Component id="button1" max="32767" attributes="0"/>
+                      <Component id="Items" max="32767" attributes="0"/>
+                      <Component id="Skills" max="32767" attributes="0"/>
                       <Component id="Attack" pref="127" max="32767" attributes="0"/>
-                      <Component id="button4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="RUN" alignment="0" max="32767" attributes="0"/>
+                      <Component id="Defend" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
@@ -154,7 +160,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AttackActionPerformed"/>
           </Events>
         </Component>
-        <Component class="java.awt.Button" name="button1">
+        <Component class="java.awt.Button" name="Skills">
           <Properties>
             <Property name="actionCommand" type="java.lang.String" value="Magic"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -166,7 +172,7 @@
             <Property name="label" type="java.lang.String" value="Magic"/>
           </Properties>
         </Component>
-        <Component class="java.awt.Button" name="button3">
+        <Component class="java.awt.Button" name="Items">
           <Properties>
             <Property name="actionCommand" type="java.lang.String" value="Items"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -178,7 +184,7 @@
             <Property name="label" type="java.lang.String" value="Items"/>
           </Properties>
         </Component>
-        <Component class="java.awt.Button" name="button4">
+        <Component class="java.awt.Button" name="RUN">
           <Properties>
             <Property name="actionCommand" type="java.lang.String" value="Flee"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -190,7 +196,7 @@
             <Property name="label" type="java.lang.String" value="Flee"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="button4MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RUNMouseClicked"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -312,6 +318,17 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="java.awt.Button" name="Defend">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="24" style="1"/>
+            </Property>
+            <Property name="label" type="java.lang.String" value="Defend"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

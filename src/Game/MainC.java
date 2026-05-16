@@ -16,7 +16,7 @@ implements ActionListener, KeyListener {
     static final int SIZE = 20;
     static final int DELAY = 1000;
 
-    ArrayList<Point> snake = new ArrayList<>();
+    ArrayList<Point> movement = new ArrayList<>();
     ArrayList<Point> enemies = new ArrayList<>();
 
 
@@ -32,7 +32,7 @@ implements ActionListener, KeyListener {
         setFocusable(true);
         addKeyListener(this);
 
-        snake.add(new Point(WIDTH / 2, HEIGHT / 2));
+        movement.add(new Point(WIDTH / 2, HEIGHT / 2));
 
         spawnEnemies();
 
@@ -53,9 +53,9 @@ implements ActionListener, KeyListener {
         }
     }
 
-    public void moveSnake() {
+    public void moveS() {
 
-        Point head = snake.get(0);
+        Point head = movement.get(0);
 
         Point newHead = new Point(
             head.x + dx * SIZE,
@@ -88,9 +88,9 @@ implements ActionListener, KeyListener {
         return;
     }
 }
-        snake.add(0, newHead);
+        movement.add(0, newHead);
 
-        snake.remove(snake.size() - 1);
+        movement.remove(movement.size() - 1);
     }
 
     public void moveEnemies() {
@@ -117,7 +117,7 @@ implements ActionListener, KeyListener {
         if (enemy.y >= HEIGHT) enemy.y = 0;
 
         // Check if enemy collides with any snake cube
-        for (Point snakePart : snake) {
+        for (Point snakePart : movement) {
             if (enemy.equals(snakePart)) {
                 Gameframe gameplay = new Gameframe();
                 gameplay.pack();
@@ -152,7 +152,7 @@ protected void paintComponent(Graphics g) {
 
     g.setColor(Color.GREEN);
 
-    for (Point p : snake) {
+    for (Point p : movement) {
         g.fillRect(p.x, p.y, SIZE, SIZE);
     }
 }
@@ -186,7 +186,7 @@ protected void paintComponent(Graphics g) {
             dy = 0;
         }
 
-        moveSnake();
+        moveS();
 
         repaint();
     }

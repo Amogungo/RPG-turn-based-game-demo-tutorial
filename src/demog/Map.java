@@ -24,6 +24,7 @@ public class Map extends javax.swing.JFrame {
      */
     public Map() {
         initComponents();
+        setResizable(false);
         
     MainC game = new MainC();
     

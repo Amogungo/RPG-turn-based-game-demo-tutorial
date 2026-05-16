@@ -19,6 +19,7 @@ public class Gameframe extends javax.swing.JFrame {
      */
     public Gameframe() {
         initComponents();
+        setResizable(false);
     }
 
     /**
@@ -37,9 +38,9 @@ public class Gameframe extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         Attack = new java.awt.Button();
-        button1 = new java.awt.Button();
-        button3 = new java.awt.Button();
-        button4 = new java.awt.Button();
+        Skills = new java.awt.Button();
+        Items = new java.awt.Button();
+        RUN = new java.awt.Button();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -48,6 +49,7 @@ public class Gameframe extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        Defend = new java.awt.Button();
 
         jMenu1.setText("jMenu1");
 
@@ -78,23 +80,23 @@ public class Gameframe extends javax.swing.JFrame {
         Attack.setLabel("Attack");
         Attack.addActionListener(this::AttackActionPerformed);
 
-        button1.setActionCommand("Magic");
-        button1.setBackground(new java.awt.Color(204, 255, 153));
-        button1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        button1.setLabel("Magic");
+        Skills.setActionCommand("Magic");
+        Skills.setBackground(new java.awt.Color(204, 255, 153));
+        Skills.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        Skills.setLabel("Magic");
 
-        button3.setActionCommand("Items");
-        button3.setBackground(new java.awt.Color(255, 255, 51));
-        button3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        button3.setLabel("Items");
+        Items.setActionCommand("Items");
+        Items.setBackground(new java.awt.Color(255, 255, 51));
+        Items.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        Items.setLabel("Items");
 
-        button4.setActionCommand("Flee");
-        button4.setBackground(new java.awt.Color(0, 204, 153));
-        button4.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        button4.setLabel("Flee");
-        button4.addMouseListener(new java.awt.event.MouseAdapter() {
+        RUN.setActionCommand("Flee");
+        RUN.setBackground(new java.awt.Color(0, 204, 153));
+        RUN.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        RUN.setLabel("Flee");
+        RUN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                button4MouseClicked(evt);
+                RUNMouseClicked(evt);
             }
         });
 
@@ -165,6 +167,10 @@ public class Gameframe extends javax.swing.JFrame {
         jLabel5.getAccessibleContext().setAccessibleName("Enemy3");
         jLabel7.getAccessibleContext().setAccessibleName("Fenemy2");
 
+        Defend.setBackground(new java.awt.Color(102, 102, 255));
+        Defend.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        Defend.setLabel("Defend");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -175,13 +181,17 @@ public class Gameframe extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Attack, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Skills, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Items, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 10, Short.MAX_VALUE))
+                        .addComponent(RUN, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Defend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,10 +200,11 @@ public class Gameframe extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(button3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Items, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Skills, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Attack, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                    .addComponent(button4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(RUN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Defend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
 
@@ -221,7 +232,7 @@ public class Gameframe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AttackActionPerformed
 
-    private void button4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button4MouseClicked
+    private void RUNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RUNMouseClicked
         // TODO add your handling code here:
         Map Mframe = new Map();
     
@@ -229,7 +240,7 @@ public class Gameframe extends javax.swing.JFrame {
         Mframe.setLocationRelativeTo(this); // centers
         Mframe.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_button4MouseClicked
+    }//GEN-LAST:event_RUNMouseClicked
 
     /**
      * @param args the command line arguments
@@ -258,9 +269,10 @@ public class Gameframe extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button Attack;
-    private java.awt.Button button1;
-    private java.awt.Button button3;
-    private java.awt.Button button4;
+    private java.awt.Button Defend;
+    private java.awt.Button Items;
+    private java.awt.Button RUN;
+    private java.awt.Button Skills;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
