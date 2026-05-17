@@ -4,10 +4,15 @@
  */
 package demog;
 
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.LinkedList;
+import Characters.Warrior;
+import Characters.Archer;
+import Characters.Bard;
+import Characters.ClassType;
+import Characters.Paladin;
+import Characters.Wizard;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 
@@ -16,19 +21,28 @@ import javax.swing.SwingUtilities;
  * @author hp
  */
 public class Classes extends javax.swing.JPanel {
-    
-    LinkedList<JToggleButton> Party = new LinkedList<>();
-    /**
-     * Creates new form Classes
-     */
-    public Classes() {
-        initComponents();
-        setupButton(jToggleButton1);
-        setupButton(jToggleButton2);
-        setupButton(jToggleButton3);
-        setupButton(jToggleButton4);
-        setupButton(jToggleButton5);
-    }
+
+    private ArrayList<ClassType> party;
+
+    private HashMap<JToggleButton, ClassType> map = new HashMap<>();
+
+public Classes(ArrayList<ClassType> party) {
+    this.party = party;
+
+    initComponents(); // MUST BE FIRST
+
+    map.put(jToggleButton1, new Warrior());
+    map.put(jToggleButton2, new Archer());
+    map.put(jToggleButton3, new Paladin());
+    map.put(jToggleButton4, new Bard());
+    map.put(jToggleButton5, new Wizard());
+
+    setupButton(jToggleButton1);
+    setupButton(jToggleButton2);
+    setupButton(jToggleButton3);
+    setupButton(jToggleButton4);
+    setupButton(jToggleButton5);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +83,11 @@ public class Classes extends javax.swing.JPanel {
 
         jToggleButton1.setText("Warrior");
         jToggleButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jToggleButton1MouseClicked(evt);
+            }
+        });
         jToggleButton1.addActionListener(this::jToggleButton1ActionPerformed);
 
         jToggleButton2.setText("Archer");
@@ -179,38 +198,29 @@ public class Classes extends javax.swing.JPanel {
         SwingUtilities.getWindowAncestor(this).dispose();
     }//GEN-LAST:event_jButton2MouseClicked
 
-       private void setupButton(JToggleButton button) {
+    private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1MouseClicked
 
-        button.addActionListener(new ActionListener() {
-                
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
+private void setupButton(JToggleButton button) {
 
-                // IF BUTTON TURNED ON
-                if (button.isSelected()) {
+    button.addActionListener(e -> {
 
-                    // ADD TO LIST
-                    Party.add(button);
+        ClassType selectedClass = map.get(button);
 
-                    // IF MORE THAN 3 BUTTONS SELECTED
-                    if (Party.size() > 3) {
+        if (button.isSelected()) {
 
-                        // REMOVE OLDEST BUTTON
-                                    JToggleButton oldest =
-                                Party.removeFirst();
-
-                        // UNPRESS IT
-                        oldest.setSelected(false);
-                    }
-                }
-                else {
-                    // REMOVE IF USER MANUALLY UNPRESSED
-                    Party.remove(button);
-                }
+            if (party.size() < 3) {
+                party.add(selectedClass);
+            } else {
+                button.setSelected(false); // block 4th selection
             }
-        });
-    }
+
+        } else {
+            party.remove(selectedClass);
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

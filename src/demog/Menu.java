@@ -4,6 +4,10 @@
  */
 package demog;
 
+import Characters.ClassType;
+import static Game.PartyClass.party;
+import java.util.ArrayList;
+
 /**
  *
  * @author hp
@@ -113,7 +117,7 @@ public class Menu extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         javax.swing.JFrame frame = new javax.swing.JFrame("Classes");
-        Classes Classframe = new Classes();
+        Classes Classframe = new Classes(party);
     
         frame.add(Classframe);
         frame.pack();

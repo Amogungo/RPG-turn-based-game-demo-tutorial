@@ -16,5 +16,4 @@ public interface ClassType {
     int getDefense();
     int getAttack();
     ArrayList<String> getSkill();
-    void displayStats();  // optional: you can give this a default body
 }

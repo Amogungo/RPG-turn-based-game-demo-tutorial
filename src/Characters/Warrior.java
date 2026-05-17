@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author hp
  */
-public abstract class Warrior implements ClassType{
+public class Warrior implements ClassType{
     
     // Fields 
     
@@ -22,7 +22,7 @@ public abstract class Warrior implements ClassType{
     
     
     //stats
-    public Warrior(String name) {
+    public Warrior() {
         String[] SkillName = { "rage","FireBall","Magic Missile", "Small Heal" };
         this.name = "Warrior";
         this.hp = 150;

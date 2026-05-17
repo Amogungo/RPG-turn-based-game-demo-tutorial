@@ -11,7 +11,7 @@ import java.util.Arrays;
  *
  * @author hp
  */
-public abstract class Wizard implements ClassType{
+public class Wizard implements ClassType{
     
     
             // Fields 
@@ -23,7 +23,7 @@ public abstract class Wizard implements ClassType{
     
     
     //stats
-    public Wizard(String name) {
+    public Wizard() {
         String[] SkillName = { "Lightning","FireBall","Magic Missile", "Small Heal" };
         this.name = "Wizard";
         this.hp = 100;

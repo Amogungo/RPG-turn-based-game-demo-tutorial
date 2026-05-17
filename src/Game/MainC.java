@@ -1,5 +1,6 @@
 package Game;
 
+import Characters.ClassType;
 import demog.Map;
 import demog.Gameframe;
 import java.awt.*;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
 import Game.Items;
+import static Game.PartyClass.party;
 
 public class MainC extends JPanel
 implements ActionListener, KeyListener {
@@ -86,7 +88,7 @@ implements ActionListener, KeyListener {
 
     if (newHead.equals(enemy)) {
 
-        Gameframe gameplay = new Gameframe();
+        Gameframe gameplay = new Gameframe(party);
         
         gameplay.pack();
         gameplay.setLocationRelativeTo(this); // centers
@@ -127,7 +129,7 @@ implements ActionListener, KeyListener {
         // Check if enemy collides with any snake cube
         for (Point snakePart : movement) {
             if (enemy.equals(snakePart)) {
-                Gameframe gameplay = new Gameframe();
+                Gameframe gameplay = new Gameframe(party);
                 gameplay.pack();
                 gameplay.setLocationRelativeTo(this);
                 gameplay.setVisible(true);

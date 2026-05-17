@@ -5,7 +5,8 @@
 package demog;
 
 import Characters.ClassType;
-import javax.swing.SwingUtilities;
+import Game.PartyClass;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +16,7 @@ import javax.swing.SwingUtilities;
 public class Gameframe extends javax.swing.JFrame {
     // Store original HUD buttons so we can restore them
     
+    private ArrayList<ClassType> party;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Gameframe.class.getName());
 
     /**
@@ -22,10 +24,19 @@ public class Gameframe extends javax.swing.JFrame {
      */
     private javax.swing.JPanel buttonPanel;
     private ClassType ActiveChar;
+    private PartyClass partySystem;
 
-    public Gameframe() {
+   public Gameframe(ArrayList<ClassType> party) {
+       
+       
     initComponents();
+    
+    this.party = party;     
+    this.partySystem = new PartyClass(party);
+    Skills.addActionListener(e -> showSkillsHud());
+    //Items.addActionListener(e -> showItemsHud());
     setResizable(false);
+    
     
     //ActiveChar = Mage;
 
@@ -45,11 +56,29 @@ public class Gameframe extends javax.swing.JFrame {
     jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
     jPanel1.add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
-    // Wire up buttons
-    Skills.addActionListener(e -> showSkillsHud());
-    Items.addActionListener(e -> showItemsHud());
+    
+     if (!party.isEmpty()) {
+        ActiveChar = party.get(0); // FIRST PICK = FIRST TURN
+    }
+     
+     updatePartyUI();
 }
     
+private void updatePartyUI() {
+     ArrayList<ClassType> p = partySystem.getParty();
+     
+     if (p.size() < 3) return;
+
+    jLabel1.setText(p.get(0).getName());
+    jLabel2.setText(p.get(1).getName());
+    jLabel8.setText(p.get(2).getName());
+
+    // simple highlight effect
+    jLabel1.setForeground(p.get(0) == ActiveChar ? java.awt.Color.GREEN : java.awt.Color.BLACK);
+    jLabel2.setForeground(p.get(1) == ActiveChar ? java.awt.Color.GREEN : java.awt.Color.BLACK);
+    jLabel8.setForeground(p.get(2) == ActiveChar ? java.awt.Color.GREEN : java.awt.Color.BLACK);
+}
+
  private void showSkillsHud() {
     buttonPanel.removeAll();
     
@@ -64,55 +93,16 @@ public class Gameframe extends javax.swing.JFrame {
         buttonPanel.add(btn);
     }
 
-    java.awt.Button skill1 = new java.awt.Button("Fireball");
-    java.awt.Button skill2 = new java.awt.Button("Ice Shard");
-    java.awt.Button skill3 = new java.awt.Button("Heal");
-    java.awt.Button skill4 = new java.awt.Button("Thunder");
-    java.awt.Button backBtn = new java.awt.Button("< Back");
 
-    skill1.setBackground(new java.awt.Color(255, 100, 50));
-    skill2.setBackground(new java.awt.Color(100, 180, 255));
-    skill3.setBackground(new java.awt.Color(100, 255, 150));
-    skill4.setBackground(new java.awt.Color(255, 220, 50));
-    backBtn.setBackground(new java.awt.Color(180, 180, 180));
+   
 
-    for (java.awt.Button b : new java.awt.Button[]{skill1, skill2, skill3, skill4, backBtn}) {
-        b.setFont(hudFont);
-        buttonPanel.add(b);
-    }
 
-    backBtn.addActionListener(e -> restoreOriginalHud());
+
 
     buttonPanel.revalidate();
     buttonPanel.repaint();
 }
 
-private void showItemsHud() {
-    buttonPanel.removeAll();
-
-    java.awt.Font hudFont = new java.awt.Font("Comic Sans MS", java.awt.Font.BOLD, 24);
-    java.awt.Color itemColor = new java.awt.Color(255, 255, 51);
-
-    java.awt.Button item1 = new java.awt.Button("Potion");
-    java.awt.Button item2 = new java.awt.Button("Ether");
-    java.awt.Button item3 = new java.awt.Button("Antidote");
-    java.awt.Button item4 = new java.awt.Button("Elixir");
-    java.awt.Button backBtn = new java.awt.Button("< Back");
-
-    for (java.awt.Button b : new java.awt.Button[]{item1, item2, item3, item4}) {
-        b.setBackground(itemColor);
-        b.setFont(hudFont);
-        buttonPanel.add(b);
-    }
-    backBtn.setBackground(new java.awt.Color(180, 180, 180));
-    backBtn.setFont(hudFont);
-    buttonPanel.add(backBtn);
-
-    backBtn.addActionListener(e -> restoreOriginalHud());
-
-    buttonPanel.revalidate();
-    buttonPanel.repaint();
-}
 
 private void restoreOriginalHud() {
     buttonPanel.removeAll();
@@ -127,11 +117,24 @@ private void restoreOriginalHud() {
 }
 
 private void useSkill(String skillName) {
+
     System.out.println(ActiveChar.getName() + " used " + skillName + "!");
-    // TODO: apply skill effect to enemy, update HP labels, etc.
+
+    // TODO: apply damage / effects here
+
+    nextTurn();        // switch to next character
     restoreOriginalHud();
 }
 
+private void nextTurn() {
+    partySystem.nextTurn();
+
+    ActiveChar = partySystem.getActiveChar();
+
+    System.out.println("Now playing: " + ActiveChar.getName());
+    
+    updatePartyUI(); 
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -380,7 +383,6 @@ private void useSkill(String skillName) {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Gameframe().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
