@@ -35,7 +35,7 @@ public class Tester extends javax.swing.JPanel {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("HOW to PLay:\n is a game\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        jTextArea1.setText("HOW to PLay:\n MEPAPER is a turn-based game\nAttack:\nPress Attack Button\nSkills:\nEach Character has a different Skill, so use it well!\nDefend:\nTake Less Damage\nItems: You have 3 items, use it well to win!\n\n\n\n\n");
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Back");

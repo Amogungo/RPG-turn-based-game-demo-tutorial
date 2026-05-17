@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
+import Game.Items;
 
 public class MainC extends JPanel
 implements ActionListener, KeyListener {
@@ -15,6 +16,8 @@ implements ActionListener, KeyListener {
     static final int HEIGHT = 360;
     static final int SIZE = 20;
     static final int DELAY = 1000;
+    
+    
 
     ArrayList<Point> movement = new ArrayList<>();
     ArrayList<Point> enemies = new ArrayList<>();
@@ -32,10 +35,15 @@ implements ActionListener, KeyListener {
         setFocusable(true);
         addKeyListener(this);
 
-        movement.add(new Point(WIDTH / 2, HEIGHT / 2));
+        // SPAWNS CORRECTLY NOW
+    movement.add(new Point(
+    (WIDTH / 2 / SIZE) * SIZE,
+    (HEIGHT / 2 / SIZE) * SIZE
+    ));
 
         spawnEnemies();
 
+        // enemy movement in game map
         timer = new Timer(DELAY, this);
         timer.start();
     }

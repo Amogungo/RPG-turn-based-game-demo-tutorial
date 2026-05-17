@@ -4,23 +4,133 @@
  */
 package demog;
 
+import Characters.ClassType;
 import javax.swing.SwingUtilities;
 
 /**
  *
  * @author hp
  */
+
 public class Gameframe extends javax.swing.JFrame {
+    // Store original HUD buttons so we can restore them
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Gameframe.class.getName());
 
     /**
      * Creates new form Gameframe
      */
+    private javax.swing.JPanel buttonPanel;
+    private ClassType ActiveChar;
+
     public Gameframe() {
-        initComponents();
-        setResizable(false);
+    initComponents();
+    setResizable(false);
+    
+    //ActiveChar = Mage;
+
+    // Create a dedicated button panel with GridLayout (5 equal columns)
+    buttonPanel = new javax.swing.JPanel(new java.awt.GridLayout(1, 5, 4, 0));
+    buttonPanel.setPreferredSize(new java.awt.Dimension(jPanel1.getPreferredSize().width, 127));
+
+    // Move the original buttons INTO buttonPanel
+    buttonPanel.add(Attack);
+    buttonPanel.add(Skills);
+    buttonPanel.add(Items);
+    buttonPanel.add(RUN);
+    buttonPanel.add(Defend);
+
+    // Add buttonPanel to jPanel1 at the SOUTH position
+    jPanel1.setLayout(new java.awt.BorderLayout());
+    jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+    jPanel1.add(buttonPanel, java.awt.BorderLayout.SOUTH);
+
+    // Wire up buttons
+    Skills.addActionListener(e -> showSkillsHud());
+    Items.addActionListener(e -> showItemsHud());
+}
+    
+ private void showSkillsHud() {
+    buttonPanel.removeAll();
+    
+
+    java.awt.Font hudFont = new java.awt.Font("Comic Sans MS", java.awt.Font.BOLD, 24);
+    
+        for (String skillName : ActiveChar.getSkill()) {
+        java.awt.Button btn = new java.awt.Button(skillName);
+        btn.setFont(hudFont);
+        btn.setBackground(new java.awt.Color(204, 255, 153));
+        btn.addActionListener(e -> useSkill(skillName)); // hook per button
+        buttonPanel.add(btn);
     }
+
+    java.awt.Button skill1 = new java.awt.Button("Fireball");
+    java.awt.Button skill2 = new java.awt.Button("Ice Shard");
+    java.awt.Button skill3 = new java.awt.Button("Heal");
+    java.awt.Button skill4 = new java.awt.Button("Thunder");
+    java.awt.Button backBtn = new java.awt.Button("< Back");
+
+    skill1.setBackground(new java.awt.Color(255, 100, 50));
+    skill2.setBackground(new java.awt.Color(100, 180, 255));
+    skill3.setBackground(new java.awt.Color(100, 255, 150));
+    skill4.setBackground(new java.awt.Color(255, 220, 50));
+    backBtn.setBackground(new java.awt.Color(180, 180, 180));
+
+    for (java.awt.Button b : new java.awt.Button[]{skill1, skill2, skill3, skill4, backBtn}) {
+        b.setFont(hudFont);
+        buttonPanel.add(b);
+    }
+
+    backBtn.addActionListener(e -> restoreOriginalHud());
+
+    buttonPanel.revalidate();
+    buttonPanel.repaint();
+}
+
+private void showItemsHud() {
+    buttonPanel.removeAll();
+
+    java.awt.Font hudFont = new java.awt.Font("Comic Sans MS", java.awt.Font.BOLD, 24);
+    java.awt.Color itemColor = new java.awt.Color(255, 255, 51);
+
+    java.awt.Button item1 = new java.awt.Button("Potion");
+    java.awt.Button item2 = new java.awt.Button("Ether");
+    java.awt.Button item3 = new java.awt.Button("Antidote");
+    java.awt.Button item4 = new java.awt.Button("Elixir");
+    java.awt.Button backBtn = new java.awt.Button("< Back");
+
+    for (java.awt.Button b : new java.awt.Button[]{item1, item2, item3, item4}) {
+        b.setBackground(itemColor);
+        b.setFont(hudFont);
+        buttonPanel.add(b);
+    }
+    backBtn.setBackground(new java.awt.Color(180, 180, 180));
+    backBtn.setFont(hudFont);
+    buttonPanel.add(backBtn);
+
+    backBtn.addActionListener(e -> restoreOriginalHud());
+
+    buttonPanel.revalidate();
+    buttonPanel.repaint();
+}
+
+private void restoreOriginalHud() {
+    buttonPanel.removeAll();
+    buttonPanel.add(Attack);
+    buttonPanel.add(Skills);
+    buttonPanel.add(Items);
+    buttonPanel.add(RUN);
+    buttonPanel.add(Defend);
+
+    buttonPanel.revalidate();
+    buttonPanel.repaint();
+}
+
+private void useSkill(String skillName) {
+    System.out.println(ActiveChar.getName() + " used " + skillName + "!");
+    // TODO: apply skill effect to enemy, update HP labels, etc.
+    restoreOriginalHud();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +159,7 @@ public class Gameframe extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         Defend = new java.awt.Button();
 
         jMenu1.setText("jMenu1");
@@ -83,7 +194,7 @@ public class Gameframe extends javax.swing.JFrame {
         Skills.setActionCommand("Magic");
         Skills.setBackground(new java.awt.Color(204, 255, 153));
         Skills.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        Skills.setLabel("Magic");
+        Skills.setLabel("Skills");
 
         Items.setActionCommand("Items");
         Items.setBackground(new java.awt.Color(255, 255, 51));
@@ -119,6 +230,8 @@ public class Gameframe extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("F2");
 
+        jLabel8.setText("jLabel8");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -130,7 +243,9 @@ public class Gameframe extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(136, 136, 136)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,7 +273,8 @@ public class Gameframe extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
@@ -281,6 +397,7 @@ public class Gameframe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

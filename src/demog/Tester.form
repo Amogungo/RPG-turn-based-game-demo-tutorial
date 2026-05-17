@@ -66,7 +66,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="HOW to PLay:&#xa; is a game&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;"/>
+            <Property name="text" type="java.lang.String" value="HOW to PLay:&#xa; MEPAPER is a turn-based game&#xa;Attack:&#xa;Press Attack Button&#xa;Skills:&#xa;Each Character has a different Skill, so use it well!&#xa;Defend:&#xa;Take Less Damage&#xa;Items: You have 3 items, use it well to win!&#xa;&#xa;&#xa;&#xa;&#xa;"/>
           </Properties>
         </Component>
       </SubComponents>
