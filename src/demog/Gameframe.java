@@ -5,6 +5,10 @@
 package demog;
 
 import Characters.ClassType;
+import Characters.Enemy;
+import Game.EnemyAI;
+import Game.EnemyAI.EnemyAction;
+import Game.Items;
 import Game.PartyClass;
 import java.util.ArrayList;
 
@@ -25,6 +29,10 @@ public class Gameframe extends javax.swing.JFrame {
     private javax.swing.JPanel buttonPanel;
     private ClassType ActiveChar;
     private PartyClass partySystem;
+    private Items inventory;
+    private boolean isTaunted = false;
+    private EnemyAI ai = new EnemyAI();
+    private Enemy tauntingEnemy;
 
    public Gameframe(ArrayList<ClassType> party) {
        
@@ -33,8 +41,18 @@ public class Gameframe extends javax.swing.JFrame {
     
     this.party = party;     
     this.partySystem = new PartyClass(party);
+    this.inventory = new Items();
+    
+    
+    ArrayList<EnemyAI.EnemyAction> actions = ai.enemyTurn();
+
+    for (EnemyAI.EnemyAction action : actions) {
+    handleAction(action);
+    }
+    
+    
     Skills.addActionListener(e -> showSkillsHud());
-    //Items.addActionListener(e -> showItemsHud());
+    Items.addActionListener(e -> showItemsHud());
     setResizable(false);
     
     
@@ -103,7 +121,54 @@ private void updatePartyUI() {
     buttonPanel.repaint();
 }
 
+private void showItemsHud() {
+    buttonPanel.removeAll();
 
+    java.awt.Font hudFont = new java.awt.Font("Comic Sans MS", java.awt.Font.BOLD, 24);
+
+    for (String itemName : inventory.getItems()) {
+        java.awt.Button btn = new java.awt.Button(itemName);
+
+        btn.setFont(hudFont);
+        btn.setBackground(new java.awt.Color(255, 255, 120));
+
+        String selectedItem = itemName;
+
+        btn.addActionListener(e -> useItem(selectedItem));
+
+        buttonPanel.add(btn);
+    }
+
+    buttonPanel.revalidate();
+    buttonPanel.repaint();
+}
+
+private void useItem(String itemName) {
+
+    System.out.println(ActiveChar.getName() + " used " + itemName + "!");
+
+    switch (itemName) {
+
+        case "Health Potion":
+            System.out.println("Healed HP!");
+            break;
+
+        case "Mana Elixir":
+            System.out.println("Restored Mana!");
+            break;
+
+        case "Revive Scroll":
+            System.out.println("Revived ally!");
+            break;
+
+        case "Fire Stone":
+            System.out.println("Buffed fire damage!");
+            break;
+    }
+
+    nextTurn();
+    restoreOriginalHud();
+}
 private void restoreOriginalHud() {
     buttonPanel.removeAll();
     buttonPanel.add(Attack);
@@ -134,6 +199,28 @@ private void nextTurn() {
     System.out.println("Now playing: " + ActiveChar.getName());
     
     updatePartyUI(); 
+}
+
+private void handleAction(EnemyAI.EnemyAction action) {
+
+    switch (action.type) {
+
+        case ATTACK:
+            System.out.println(action.actor.name + " attacks!");
+            break;
+
+        case DEFEND:
+            System.out.println(action.actor.name + " defends!");
+            action.actor.defense += 2;
+            break;
+
+        case TAUNT:
+            System.out.println(action.actor.name + " taunts!");
+
+            tauntingEnemy = action.actor;
+            isTaunted = true;
+            break;
+    }
 }
     /**
      * This method is called from within the constructor to initialize the form.

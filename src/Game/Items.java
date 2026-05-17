@@ -1,28 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Game;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author hp
- */
 public class Items {
-    ArrayList<String> Itemus = new ArrayList<>();
-    
-    
- public void initItems() {
-     
-        // All Characters have this
-        Itemus.add("Health Potion");
-        Itemus.add("Revive Scroll");
-        Itemus.add("Mana Elixir");
-        Itemus.add("Fire Stome");
+
+    private ArrayList<String> itemus = new ArrayList<>();
+
+    public Items() {
+        initItems(); // auto-load items
     }
- 
- 
-    
+
+    private void initItems() {
+        itemus.add("Health Potion");
+        itemus.add("Revive Scroll");
+        itemus.add("Mana Elixir");
+        itemus.add("Fire Stone");
+    }
+
+    public ArrayList<String> getItems() {
+        return itemus;
+    }
 }
