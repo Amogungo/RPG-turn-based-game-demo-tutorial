@@ -22,7 +22,7 @@ public class Bard implements ClassType{
     
     //stats
     public Bard() {
-        String[] SkillName = { "Sing","FireBall","Magic Missile", "Small Heal" };
+        String[] SkillName = { "Sing","Gun","Flirt", "Back" };
         this.name = "Bard";
         this.hp = 245;
         this.defense = 35;
@@ -39,6 +39,7 @@ public class Bard implements ClassType{
     @Override public int getDefense()    { return defense; }
     @Override public int getAttack()    { return attack; }
     @Override public ArrayList<String> getSkill(){ return skills;}
+    @Override public String getImagePath() {return "/images/Ally/Bard.gif";}
     
     
             // Skills

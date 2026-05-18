@@ -10,7 +10,9 @@ import Game.EnemyAI;
 import Game.EnemyAI.EnemyAction;
 import Game.Items;
 import Game.PartyClass;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -56,7 +58,11 @@ public class Gameframe extends javax.swing.JFrame {
     setResizable(false);
     
     
-    //ActiveChar = Mage;
+    setEnemyImage(jLabel3, "/images/Enemy/Brute.png", 100, 100);
+    setEnemyImage(jLabel4, "/images/Enemy/BUGGER.png", 100, 100);
+    setEnemyImage(jLabel5, "/images/Enemy/GOOMBAFU.jpg", 120, 120);
+    setEnemyImage(jLabel6, "/images/Enemy/Fire Spirit.jpg", 90, 90);
+    setEnemyImage(jLabel7, "/images/Enemy/Enemy1.jpg", 90, 90);
 
     // Create a dedicated button panel with GridLayout (5 equal columns)
     buttonPanel = new javax.swing.JPanel(new java.awt.GridLayout(1, 5, 4, 0));
@@ -82,19 +88,58 @@ public class Gameframe extends javax.swing.JFrame {
      updatePartyUI();
 }
     
-private void updatePartyUI() {
-     ArrayList<ClassType> p = partySystem.getParty();
-     
-     if (p.size() < 3) return;
+private void setLabelImage(javax.swing.JLabel label, String path) {
 
+    java.net.URL location = getClass().getResource(path);
+
+    if (location == null) {
+        System.out.println("Image not found: " + path);
+        return;
+    }
+
+    label.setIcon(new javax.swing.ImageIcon(location));
+}
+   
+private void setEnemyImage(javax.swing.JLabel label, String path, int w, int h) {
+
+    ImageIcon icon = new ImageIcon(getClass().getResource(path));
+
+    Image img = icon.getImage();
+    Image scaled = img.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+
+    label.setIcon(new ImageIcon(scaled));
+    label.setText("");
+}
+private void updatePartyUI() {
+
+    ArrayList<ClassType> p = partySystem.getParty();
+
+    
+    if (p.size() < 3) return;
+    
+    
+    // Class NAMEs
     jLabel1.setText(p.get(0).getName());
     jLabel2.setText(p.get(1).getName());
     jLabel8.setText(p.get(2).getName());
+    
+    
+    //Find what character User picked
+    setLabelImage(jLabel1, p.get(0).getImagePath());
+    setLabelImage(jLabel2, p.get(1).getImagePath());
+    setLabelImage(jLabel8, p.get(2).getImagePath());
 
-    // simple highlight effect
-    jLabel1.setForeground(p.get(0) == ActiveChar ? java.awt.Color.GREEN : java.awt.Color.BLACK);
-    jLabel2.setForeground(p.get(1) == ActiveChar ? java.awt.Color.GREEN : java.awt.Color.BLACK);
-    jLabel8.setForeground(p.get(2) == ActiveChar ? java.awt.Color.GREEN : java.awt.Color.BLACK);
+    jLabel1.setForeground(
+        p.get(0) == ActiveChar ? java.awt.Color.GREEN : java.awt.Color.BLACK
+    );
+
+    jLabel2.setForeground(
+        p.get(1) == ActiveChar ? java.awt.Color.GREEN : java.awt.Color.BLACK
+    );
+
+    jLabel8.setForeground(
+        p.get(2) == ActiveChar ? java.awt.Color.GREEN : java.awt.Color.BLACK
+    );
 }
 
  private void showSkillsHud() {
@@ -301,25 +346,34 @@ private void handleAction(EnemyAI.EnemyAction action) {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(102, 204, 0));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
         jPanel2.setForeground(new java.awt.Color(51, 51, 51));
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("jLabel1");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("jLabel2");
 
         jLabel3.setText("E1");
+        jLabel3.setName("Enemy1"); // NOI18N
 
         jLabel4.setText("E2");
+        jLabel4.setName("Enemy2"); // NOI18N
 
         jLabel5.setText("E3");
+        jLabel5.setName("Enemy3"); // NOI18N
 
         jLabel6.setText("F1");
-        jLabel6.setEnabled(false);
+        jLabel6.setName("Fenemy1"); // NOI18N
 
-        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel7.setForeground(new java.awt.Color(102, 102, 255));
         jLabel7.setText("F2");
+        jLabel7.setName("Fenemy2"); // NOI18N
 
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("jLabel8");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -327,45 +381,52 @@ private void handleAction(EnemyAI.EnemyAction action) {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(472, 472, 472)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(133, 133, 133)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         jLabel3.getAccessibleContext().setAccessibleName("Enemy1");
@@ -385,6 +446,9 @@ private void handleAction(EnemyAI.EnemyAction action) {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Attack, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Skills, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -393,11 +457,8 @@ private void handleAction(EnemyAI.EnemyAction action) {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RUN, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Defend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(10, 10, 10))
+                        .addComponent(Defend, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                        .addGap(10, 10, 10))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

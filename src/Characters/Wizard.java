@@ -24,7 +24,7 @@ public class Wizard implements ClassType{
     
     //stats
     public Wizard() {
-        String[] SkillName = { "Lightning","FireBall","Magic Missile", "Small Heal" };
+        String[] SkillName = { "Lightning","FireBall","Magic Missile", "Back" };
         this.name = "Wizard";
         this.hp = 100;
         this.defense = 25;
@@ -41,6 +41,7 @@ public class Wizard implements ClassType{
     @Override public int getDefense()    { return defense; }
     @Override public int getAttack()    { return attack; }
     @Override public ArrayList<String> getSkill(){ return skills;}
+    @Override public String getImagePath() {return "/images/Ally/wizardc.gif";}
     
     
     class Lightning {

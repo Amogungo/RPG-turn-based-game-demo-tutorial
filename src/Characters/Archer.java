@@ -23,7 +23,7 @@ public class Archer implements ClassType{
     
     //stats
     public Archer() {
-        String[] SkillName = { "SprayShoot","Acid","TripTrap", "Small Heal" };
+        String[] SkillName = { "SprayShoot","Acid","TripTrap", "Back" };
         this.name = "Archer";
         this.hp = 150;
         this.defense = 10;
@@ -40,7 +40,7 @@ public class Archer implements ClassType{
     @Override public int getDefense()    { return defense; }
     @Override public int getAttack()    { return attack; }
     @Override public ArrayList<String> getSkill(){ return skills;}
-    
+    @Override public String getImagePath() {return "/images/Ally/Archer.gif";}
     
         // Skills
         class Shoot{

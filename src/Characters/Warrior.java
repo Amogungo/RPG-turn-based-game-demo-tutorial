@@ -23,7 +23,7 @@ public class Warrior implements ClassType{
     
     //stats
     public Warrior() {
-        String[] SkillName = { "rage","FireBall","Magic Missile", "Small Heal" };
+        String[] SkillName = { "rage","BloodyFight","Counter", "Back" };
         this.name = "Warrior";
         this.hp = 150;
         this.defense = 30;
@@ -40,6 +40,7 @@ public class Warrior implements ClassType{
     @Override public int getDefense()    { return defense; }
     @Override public int getAttack()    { return attack; }
     @Override public ArrayList<String> getSkill(){ return skills;}
+    @Override public String getImagePath() {return "/images/Ally/Warrior.gif";}
     
     // Skills
         class rage{

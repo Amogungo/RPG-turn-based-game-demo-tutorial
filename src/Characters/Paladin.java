@@ -23,7 +23,7 @@ public class Paladin implements ClassType{
     
     //stats
     public Paladin() {
-        String[] SkillName = { "Shield","FireBall","Magic Missile", "Small Heal" };
+        String[] SkillName = { "Shield","Holy Light","Slam", "back" };
         this.name = "Paladin";
         this.hp = 300;
         this.defense = 60;
@@ -39,6 +39,7 @@ public class Paladin implements ClassType{
     @Override public int getDefense()    { return defense; }
     @Override public int getAttack()    { return attack; }
     @Override public ArrayList<String> getSkill(){ return skills;}
+    @Override public String getImagePath() {return "/images/Ally/Paladin.gif";}
     
         // Skills
     class Shield{

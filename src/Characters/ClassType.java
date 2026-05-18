@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author hp
  */
 public interface ClassType {
+    String getImagePath();
     String getName();
     int getHp();
     int getDefense();
