@@ -217,6 +217,7 @@ private void useItem(String itemName) {
 
     switch (itemName) {
 
+        //System Prints But no Function to change Character stas or buff Damage
         case "Health Potion":
             System.out.println("Healed HP!");
             break;
@@ -249,10 +250,13 @@ private void restoreOriginalHud() {
     buttonPanel.repaint();
 }
 
+    //No values yet, To add
     private void handleAttack() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    
+    //No Values purpose yet, To add
     private void handleDefend() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
