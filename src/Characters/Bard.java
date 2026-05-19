@@ -22,7 +22,7 @@ public class Bard implements ClassType{
     
     //stats
     public Bard() {
-        String[] SkillName = { "Sing","Gun","Flirt", "Back" };
+        String[] SkillName = { "Sing","Gun","Flirt", "Harsh Words" };
         this.name = "Bard";
         this.hp = 245;
         this.defense = 35;

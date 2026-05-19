@@ -10,6 +10,7 @@ import java.util.Random;
 import javax.swing.*;
 import Game.Items;
 import static Game.PartyClass.party;
+import java.util.IdentityHashMap;
 
 public class MainC extends JPanel
 implements ActionListener, KeyListener {
@@ -30,9 +31,24 @@ implements ActionListener, KeyListener {
 
     Timer timer;
     Random random = new Random();
+    
+    private boolean battleStarted = false;
 
+    //Images for icons
+    private Image playerImage; 
+    private Image[] enemyImages;
+    private IdentityHashMap<Point, Image> enemyImageMap = new IdentityHashMap<>();
+    
     public MainC() {
 
+         playerImage = new ImageIcon(getClass().getResource("/images/block.png")).getImage();
+        enemyImages = new Image[]{
+        new ImageIcon(getClass().getResource("/images/Enemy/Brute.png")).getImage(),
+        new ImageIcon(getClass().getResource("/images/Enemy/BUGGER.png")).getImage(),
+        new ImageIcon(getClass().getResource("/images/Enemy/GOOMBAFU.jpg")).getImage(),
+        new ImageIcon(getClass().getResource("/images/Enemy/Fire Spirit.jpg")).getImage(),
+        new ImageIcon(getClass().getResource("/images/Enemy/Enemy1.jpg")).getImage()
+};
 
         setFocusable(true);
         addKeyListener(this);
@@ -51,17 +67,18 @@ implements ActionListener, KeyListener {
     }
 
 
-    public void spawnEnemies() {
+public void spawnEnemies() {
+    for (int i = 0; i < 5; i++) {
+        int x = random.nextInt(WIDTH / SIZE) * SIZE;
+        int y = random.nextInt(HEIGHT / SIZE) * SIZE;
 
-        for (int i = 0; i < 5; i++) {
+        Point enemy = new Point(x, y);
+        enemies.add(enemy);
 
-            int x = random.nextInt(WIDTH / SIZE) * SIZE;
-            int y = random.nextInt(HEIGHT / SIZE) * SIZE;
-            
-        
-            enemies.add(new Point(x, y));
-        }
+        // assign random image to this enemy
+        enemyImageMap.put(enemy, enemyImages[random.nextInt(enemyImages.length)]);
     }
+}
 
     public void moveS() {
 
@@ -86,7 +103,8 @@ implements ActionListener, KeyListener {
     
     for (Point enemy : enemies) {
 
-    if (newHead.equals(enemy)) {
+    if (newHead.equals(enemy) && !battleStarted) {
+        battleStarted = true;
 
         Gameframe gameplay = new Gameframe(party);
         
@@ -128,7 +146,9 @@ implements ActionListener, KeyListener {
 
         // Check if enemy collides with any snake cube
         for (Point snakePart : movement) {
-            if (enemy.equals(snakePart)) {
+            if (enemy.equals(snakePart) && !battleStarted) {
+                 battleStarted = true;
+                
                 Gameframe gameplay = new Gameframe(party);
                 gameplay.pack();
                 gameplay.setLocationRelativeTo(this);
@@ -151,19 +171,22 @@ implements ActionListener, KeyListener {
    
 @Override
 protected void paintComponent(Graphics g) {
-
     super.paintComponent(g);
 
-    g.setColor(Color.MAGENTA);
-
+    // Draw enemies with image instead of magenta rect
     for (Point enemy : enemies) {
+    Image img = enemyImageMap.get(enemy);
+    if (img != null) {
+        g.drawImage(img, enemy.x, enemy.y, SIZE, SIZE, this);
+    } else {
+        g.setColor(Color.MAGENTA); // fallback if image fails to load
         g.fillRect(enemy.x, enemy.y, SIZE, SIZE);
+        }
     }
 
-    g.setColor(Color.GREEN);
-
+    // Draw player with image instead of green rect
     for (Point p : movement) {
-        g.fillRect(p.x, p.y, SIZE, SIZE);
+        g.drawImage(playerImage, p.x, p.y, SIZE, SIZE, this);
     }
 }
 

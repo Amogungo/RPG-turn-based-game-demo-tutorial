@@ -23,7 +23,7 @@ public class Archer implements ClassType{
     
     //stats
     public Archer() {
-        String[] SkillName = { "SprayShoot","Acid","TripTrap", "Back" };
+        String[] SkillName = { "SprayShoot","Acid","TripTrap", "Sneak" };
         this.name = "Archer";
         this.hp = 150;
         this.defense = 10;

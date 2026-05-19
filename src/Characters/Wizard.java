@@ -24,7 +24,7 @@ public class Wizard implements ClassType{
     
     //stats
     public Wizard() {
-        String[] SkillName = { "Lightning","FireBall","Magic Missile", "Back" };
+        String[] SkillName = { "Lightning","FireBall","Magic Missile", "Eruption" };
         this.name = "Wizard";
         this.hp = 100;
         this.defense = 25;

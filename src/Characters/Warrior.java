@@ -23,7 +23,7 @@ public class Warrior implements ClassType{
     
     //stats
     public Warrior() {
-        String[] SkillName = { "rage","BloodyFight","Counter", "Back" };
+        String[] SkillName = { "rage","BloodyFight","Counter", "Hard Swing" };
         this.name = "Warrior";
         this.hp = 150;
         this.defense = 30;

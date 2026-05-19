@@ -23,7 +23,7 @@ public class Paladin implements ClassType{
     
     //stats
     public Paladin() {
-        String[] SkillName = { "Shield","Holy Light","Slam", "back" };
+        String[] SkillName = { "Shield","Holy Light","Slam", "Prayer" };
         this.name = "Paladin";
         this.hp = 300;
         this.defense = 60;
