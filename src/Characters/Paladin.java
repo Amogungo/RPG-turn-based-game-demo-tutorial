@@ -41,7 +41,7 @@ public class Paladin implements ClassType{
     @Override public ArrayList<String> getSkill(){ return skills;}
     @Override public String getImagePath() {return "/images/Ally/Paladin.gif";}
     
-        // Skills
+        // Skills // no values yet
     class Shield{
         
     }

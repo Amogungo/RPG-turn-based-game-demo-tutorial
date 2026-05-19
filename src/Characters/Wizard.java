@@ -44,6 +44,7 @@ public class Wizard implements ClassType{
     @Override public String getImagePath() {return "/images/Ally/wizardc.gif";}
     
     
+    // no values yet
     class Lightning {
         
     }

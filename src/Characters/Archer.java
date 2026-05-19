@@ -42,7 +42,7 @@ public class Archer implements ClassType{
     @Override public ArrayList<String> getSkill(){ return skills;}
     @Override public String getImagePath() {return "/images/Ally/Archer.gif";}
     
-        // Skills
+        // Skills // no values yet
         class Shoot{
             
         }

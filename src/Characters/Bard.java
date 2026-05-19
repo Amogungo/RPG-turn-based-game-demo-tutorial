@@ -42,7 +42,7 @@ public class Bard implements ClassType{
     @Override public String getImagePath() {return "/images/Ally/Bard.gif";}
     
     
-            // Skills
+            // Skills // no values yet
         class Sing{
             
         }

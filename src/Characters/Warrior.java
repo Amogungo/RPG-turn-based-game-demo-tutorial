@@ -42,7 +42,7 @@ public class Warrior implements ClassType{
     @Override public ArrayList<String> getSkill(){ return skills;}
     @Override public String getImagePath() {return "/images/Ally/Warrior.gif";}
     
-    // Skills
+    // Skills // no values yet
         class rage{
                 
             }
